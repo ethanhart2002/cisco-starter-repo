@@ -1,27 +1,25 @@
 import React from 'react'
 
 class IPAddress extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            url: props.url,
+            ipAddress: null
+        };
+    }
 
+    fetchComponent() {
+        fetch(this.state.url)
+            .then(response => response.json())
+            .then(data => this.setState({ipAddress: data.ip}));
+    }
     render() {
 
-        const fetchAddress = useState([])
-
-        const getData = () => {
-            fetch('https://api.ipify.org?format=json')
-            .then((response) => response.json())
-            .then((data) => {
-            console.log(data)
-            fetchAddress(data)
-            })
-        }
-
-        useEffect(() => {
-        getData()
-        }, [])
-        
         return (
-            <>
-            </>
+            <span className="IPAddress">
+                {this.state.ipAddress}
+            </span>
         );
 
     }
